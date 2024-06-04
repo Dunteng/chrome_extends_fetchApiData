@@ -1,0 +1,31 @@
+{
+  "name": "获取并数据清洗礼物面板数据json",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "获取并数据清洗礼物面板数据json",
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "permissions": [
+    "scripting",
+    "cookies",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "declarativeNetRequest",
+    "storage"
+  ],
+  "host_permissions": ["<all_urls>"]
+}

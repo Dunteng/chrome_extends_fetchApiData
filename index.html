@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .data-area {
+        width: 100vw;
+        height: 500px;
+        overflow: auto;
+        margin: 20px auto;
+        background-color: pink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 本页面是测试用，和扩展程序无关 -->
+    <button id="btn_get">获取数据</button>
+    <div class="data-area"></div>
+    <p>
+      本页面用http-server 启动个web服务后直接访问就行，我本地地址是
+      http://127.0.0.1:5500，你在测试时可能是192.xxx.xxx.xx，要替换成你自己的地址
+      <br />
+    </p>
+    <script>
+      function initHtml(result) {
+        document.getElementsByClassName("data-area")[0].innerHTML =
+          JSON.stringify(result);
+        console.log(result);
+      }
+      //流程6 结束 接受消息，获取到需要的数据
+      window.addEventListener("message", (event) => {
+        if (event.data.code == "获取的结果数据") {
+          initHtml(event.data.data.response);
+        }
+      });
+
+      let btn_get = document.getElementById("btn_get");
+      btn_get.onclick = function () {
+        //流程1 开始 发生消息，要获取什么数据
+        let message = { params1: "自定义参数", action: "去获取礼物数据" };
+        let targetOrigin = "http://127.0.0.1:5500";
+        window.postMessage(message, targetOrigin);
+      };
+    </script>
+  </body>
+</html>

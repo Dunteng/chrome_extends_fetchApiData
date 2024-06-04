@@ -1,0 +1,2 @@
+# chrome_extends_fetchApiData
+chrome扩展程序跨域调用礼物面板接口数据并做数据清洗
